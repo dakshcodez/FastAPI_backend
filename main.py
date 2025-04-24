@@ -21,10 +21,21 @@ async def view_products():
     return {"products": products}
 
 # Search for a product by category
-@app.get("/search_products/{category}")
+@app.get("/search_by_category/{category}")
 async def search_product_by_category(category: str):
-    search_res = []
+    search_res: Product = []
     for product in products:
         if product.category == category:
             search_res.append(product)
-    return {"products": search_res}
+    return {"search results": search_res}
+
+# Search for a product by keywords
+@app.get("/search_by_keyword/{search_keyword}")
+async def search_product_by_keyword(search_keyword: str):
+    search_res: Product = []
+    for product in products:
+        for keyword in product.keywords:
+            if search_keyword == keyword:
+                search_res.append(product)
+                break
+    return {"search results": search_res}
