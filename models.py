@@ -6,3 +6,9 @@ class Product(BaseModel):
     price: float
     category: str
     keywords : tuple
+
+class User(BaseModel):
+    username: str
+    full_name: str = ""
+    email: str = ""
+    
